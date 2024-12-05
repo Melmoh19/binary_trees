@@ -3,24 +3,19 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_node - function that creates a binary tree node
+ * binary_tree_sibling - a function that finds the sibling of a node
  *
- * @parent: the parent of the leafs or nodes
- * @value: the value to be inserted
+ * @node: pointer to the node to find the siblings
  *
- * Return: pointer to the new node
+ * Return: NULL if node is NULL or parent is NULL
+ * if node has no siblings, return NULL
  */
-
-binary_tree_t *binary_tree_node(binary_tree_t *parent, int value)
+binary_tree_t *binary_tree_sibling(binary_tree_t *node)
 {
-	binary_tree_t *new;
-
-	new = malloc(sizeof(binary_tree_t));
-	if (new == NULL)
+	if (node == NULL || node->parent == NULL)
 		return (NULL);
-	new->left = NULL;
-	new->right = NULL;
-	new->parent = parent;
-	new->n = value;
-	return (new);
+
+	if (node->parent->right != node)
+		return (node->parent->right);
+	return (node->parent->left);
 }
